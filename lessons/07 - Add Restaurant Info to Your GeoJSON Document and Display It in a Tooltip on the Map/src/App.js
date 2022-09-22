@@ -15,6 +15,8 @@ const MAPBOX_STYLEID = process.env.REACT_APP_MAPBOX_STYLEID;
 function App() {
   const mapRef = useRef();
 
+  // console.log(locations);
+
   useEffect(() => {
     delete L.Icon.Default.prototype._getIconUrl;
 
@@ -50,7 +52,43 @@ function App() {
      * What option can we use to add popups to our markers?
      */
 
-    const geoJson = new L.GeoJSON(locations);
+    const geoJson = new L.GeoJSON(locations, {
+      onEachFeature: (feature = {}, layer) => {
+        const { properties = {} } = feature;
+        const { name, delivery, tags, phone, website, vegan  } = properties;
+        // console.log(name);
+
+        const popup = L.popup();
+
+        const html = `
+        <div class="restaurant-popup">
+          <h3>${name}</h3>
+          <ul>
+            <li>
+              ${tags.join(', ')}
+            </li>
+            <li>
+              <strong>Delivery: </strong>${delivery ? "Yes": "No"}
+            </li>
+            <li>
+              <strong>Phone: </strong>${phone}
+            </li>
+            <li>
+              <strong>Website: </strong><a href="${website}">${website}</a>
+            </li>
+            <li>
+              <strong>Vegan Friendly? </strong>${vegan ? "Yes": "No"}
+            </li>
+          </ul>
+        </div>
+        `;
+
+        popup.setContent(html);
+
+        layer.bindPopup(popup);
+
+      }
+    });
 
     geoJson.addTo(map);
   }, [mapRef]);

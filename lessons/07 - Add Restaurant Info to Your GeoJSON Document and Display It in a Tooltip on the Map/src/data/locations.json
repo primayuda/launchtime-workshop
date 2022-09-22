@@ -4,7 +4,19 @@
   "features": [
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "name":"DC Pizza",
+        "delivery": true,
+        "phone": "(202) 331-1800",
+        "website": "http://www.dcpizzaonline.com/",
+        "tags": [
+          "Pizza",
+          "Wings",
+          "Sandwiches",
+          "Salads"
+        ],
+        "vegan": true
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -15,7 +27,17 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "name": "HomeSlyce DC",
+        "delivery": true,
+        "phone": "(202) 559-1555",
+        "website": "http://www.homeslyce.com/",
+        "tags": [
+          "Late Night Snacks",
+          "Happy Hour",
+          "Pizza"
+        ]
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -26,7 +48,18 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "name": "Pi Pizzeria",
+        "delivery": true,
+        "phone": "(202) 393-5484",
+        "website": "http://www.pi-pizza.com/",
+        "tags": [
+          "Quick Bite",
+          "Eco-Friendly Bar",
+          "Pizza"
+        ],
+        "vegan": true
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -37,7 +70,17 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "name": "Founding Farmers DC",
+        "delivery": false,
+        "phone": "(202) 822-8783",
+        "website": "https://www.wearefoundingfarmers.com/locations/dc/",
+        "tags": [
+          "American (Traditional)",
+          "Coffee & Tea",
+          "Breakfast & Brunch"
+        ]
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -48,7 +91,17 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "name": "Froggy Bottom Pub",
+        "delivery": false,
+        "phone": "(202) 338-3000",
+        "website": "https://www.froggybottompub.com/",
+        "tags": [
+          "Vietnamese",
+          "American (New)",
+          "Pubs"
+        ]
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [

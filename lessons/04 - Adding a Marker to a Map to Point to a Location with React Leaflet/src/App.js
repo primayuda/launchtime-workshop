@@ -5,9 +5,10 @@
  * those components. How can we import them below?
  */
 
-import React from 'react';
-import { Map, TileLayer } from 'react-leaflet';
+import React, { useEffect } from 'react';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 import './assets/stylesheets/App.css';
 
 import Layout from './components/Layout';
@@ -24,6 +25,15 @@ function App() {
    * What can we do to fix this?
    * See https://github.com/PaulLeCam/react-leaflet/issues/453#issuecomment-410450387
    */
+  useEffect(() => {
+    delete L.Icon.Default.prototype._getIconUrl;
+
+    L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
+  }, [])
 
   return (
     <Layout>
@@ -38,6 +48,16 @@ function App() {
            * local attraction. How can we make use of the Leaflet
            * Marker and Popup component to point our location out?
            */ }
+        <Marker position={[38.890044197621066, -77.01953914018704]}>
+          <Popup>
+            Smithsonian National Air & Space Museum
+          </Popup>
+        </Marker>
+        <Marker position={[38.89986407547603, -77.00812365939636]}>
+          <Popup>
+            Smithsonian National Postal Museum
+          </Popup>
+        </Marker>
       </Map>
     </Layout>
   );

@@ -18,7 +18,7 @@ const Header = () => {
         </p>
         <div className="header-account">
           <p className="header-avatar" style={avatarStyles}>
-            <span className="visually-hidden">Colby Fayock</span>
+            <span className="visually-hidden">Prima</span>
           </p>
         </div>
       </Container>

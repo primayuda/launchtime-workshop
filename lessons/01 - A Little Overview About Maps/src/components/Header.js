@@ -4,7 +4,7 @@ import React from 'react';
 import Container from './Container';
 import Logo from './Logo';
 
-import avatarImage from '../assets/shared/avatar.jpg';
+import avatarImage from '../assets/shared/avatar.jpeg';
 
 const Header = () => {
   const avatarStyles = {

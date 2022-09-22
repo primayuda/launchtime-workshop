@@ -122,13 +122,35 @@ function App() {
      * If we want to fire custom functionality, how can we listen
      * to events on the map for when a location is found?
      */
+    map.on('locationfound', handleOnLocationFound)
 
     /**
      * @lesson-10-todo Extra Credit
      * After setting our event handler, how can we make sure React
      * cleans up those handlers when the component unmounts?
      */
+    return () => {
+      map.off('locationfound', handleOnLocationFound)
+    }
   }, [mapRef]);
+
+  function handleOnLocationFound(event) {
+    const { current = {} } = mapRef;
+    const { leafletElement: map } = current;
+
+    const latlng = event.latlng;
+
+    const marker = L.marker(latlng);
+    marker.addTo(map);
+
+    const radius = event.accuracy;
+    const circle = L.circle(latlng, {
+      radius,
+      color: '#26c6da'
+    });
+    circle.addTo(map);
+
+  }
 
   function handleOnSetLocation() {
     const { current = {} } = mapRef;
@@ -142,13 +164,24 @@ function App() {
      * we want to be able to show someone where that is on the map.
      * How can we create a marker and update our map to that location?
      */
+    const marker = L.marker(locationNationalGeographic);
+    marker.addTo(map);
+    map.setView(locationNationalGeographic, 18);
+  };
+
+  function handleOnFindLocation() {
+    const { current = {} } = mapRef;
+    const { leafletElement: map } = current;
+
+    map.locate({
+      setView: true
+    });
   }
 
   return (
     <Layout>
       <div className="search-actions">
         <ul>
-
           <li>
             <button onClick={handleOnSetLocation}>
               Set Location to National Geographic Museum
@@ -161,6 +194,11 @@ function App() {
              * relation to our restaurants. How can we find someone's
              * location and add a marker when clicking on a button?
              */ }
+          <li>
+            <button onClick={handleOnFindLocation}>
+              Find My Location
+            </button>
+          </li>   
         </ul>
       </div>
       <Map ref={mapRef} center={[38.907132, -77.036546]} zoom={12}>

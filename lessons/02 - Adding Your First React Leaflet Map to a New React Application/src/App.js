@@ -6,7 +6,8 @@ import './assets/stylesheets/App.css';
  * In order to build our map, we need to import out components.
  * How can we add those to our project?
  */
-
+import { Map, TileLayer } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 import Layout from './components/Layout';
 
@@ -19,7 +20,12 @@ function App() {
        * the components we just imported above, how can we
        * configure the props to show our map?
        */ }
-      <h1 className="text-center">Welcome to LaunchTime</h1>
+      <Map center={[38.907132, -77.036546]} zoom={12} >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href=&quot;http://osm.org/copyright&quot;>Open StreetMap</a> contributors'
+        />
+      </Map>
     </Layout>
   );
 }

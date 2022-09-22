@@ -50,8 +50,18 @@ function App() {
          * file. How can we use it to show delivery zones on the map?
          */
 
-        const { properties = {} } = feature;
-        const { name, delivery, tags, phone, website } = properties;
+        const { properties = {}, geometry = {} } = feature;
+        const { name, delivery, tags, phone, website, deliveryRadius } = properties;
+        const { coordinates } = geometry;
+
+        let deliveryZoneCircle;
+
+        if (delivery) {
+          deliveryZoneCircle=L.circle(coordinates.reverse(), {
+            radius: deliveryRadius,
+            color: 'blueviolet'
+          });
+        };
 
         const popup = L.popup();
 
@@ -78,6 +88,14 @@ function App() {
         popup.setContent(html)
 
         layer.bindPopup(popup);
+
+        layer.on("mouseover", () => {
+          if (deliveryZoneCircle) deliveryZoneCircle.addTo(map);
+        });
+
+        layer.on("mouseout", () => {
+          if (deliveryZoneCircle) deliveryZoneCircle.removeFrom(map);
+        })
       }
     });
 

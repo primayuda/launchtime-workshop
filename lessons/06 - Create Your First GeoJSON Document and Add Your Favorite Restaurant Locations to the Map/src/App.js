@@ -11,6 +11,7 @@ import Layout from './components/Layout';
  * In order to add our locations to the map, we need the data.
  * How can we make it available to this file?
  */
+import locations from './data/locations.json';
 
 const MAPBOX_API_KEY = process.env.REACT_APP_MAPBOX_API_KEY;
 const MAPBOX_USERID = process.env.REACT_APP_MAPBOX_USERID;
@@ -18,6 +19,8 @@ const MAPBOX_STYLEID = process.env.REACT_APP_MAPBOX_STYLEID;
 
 function App() {
   const mapRef = useRef();
+
+  // console.log(locations);
 
   useEffect(() => {
     delete L.Icon.Default.prototype._getIconUrl;
@@ -51,11 +54,9 @@ function App() {
      * document ready to add to our Leaflet map. How can we use
      * the Leaflet GeoJSON instance to add or locations?
      */
-
-    const marker = L.marker([38.888369, -77.019900])
-
-    marker.bindPopup('Smithsonian National Air and Space Museum');
-    marker.addTo(map);
+    const geoJson = new L.GeoJSON(locations);
+    geoJson.addTo(map);
+    
   }, [mapRef]);
 
   return (

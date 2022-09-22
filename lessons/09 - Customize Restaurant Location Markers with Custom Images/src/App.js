@@ -13,6 +13,8 @@ import locations from './data/locations';
  * In order to customize our images, we need to first import them.
  * How can import images for our project?
  */
+import utensilsIcon from '../src/assets/shared/utensils-marker.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 const MAPBOX_API_KEY = process.env.REACT_APP_MAPBOX_API_KEY;
 const MAPBOX_USERID = process.env.REACT_APP_MAPBOX_USERID;
@@ -54,6 +56,21 @@ function App() {
        * to customize our location data. How can we use the options available
        * to us to add a custom image for our markers?
        */
+      pointToLayer: (feature, latlng) => {
+        return L.marker(latlng, {
+          // icon: new L.Icon({
+          //   iconUrl: utensilsIcon,
+          //   iconSize: [26, 26],
+          //   popupAnchor: [0, -15],
+          //   shadowUrl: markerShadow,
+          //   shadowAnchor: [13, 28]
+          // })
+          icon: new L.divIcon({
+            html: '<div class="location-marker">🍽</div>',
+            iconSize: [26, 26]
+          })
+        })
+      },
 
       onEachFeature: (feature = {}, layer) => {
         const { properties = {}, geometry = {}  } = feature;
@@ -64,7 +81,8 @@ function App() {
 
         if ( deliveryRadius ) {
           deliveryZoneCircle = L.circle(coordinates.reverse(), {
-            radius: deliveryRadius
+            radius: deliveryRadius,
+            color: "blueviolet"
           });
         }
 

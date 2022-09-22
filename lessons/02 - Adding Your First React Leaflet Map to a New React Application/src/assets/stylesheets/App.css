@@ -6,12 +6,17 @@
 */
 
 /* Add Exercise 2 answer here */
-
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
 /*
   @lesson-02-todo Extra Credit
   We want to our map to be able to take up as much space
   as possible within our viewport. How can we remove the
   extra padding only on the Search Page?
 */
-
+main {
+  padding: 0;
+}
 /* Add Extra Credit answer here */
